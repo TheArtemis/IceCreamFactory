@@ -1,62 +1,88 @@
 <script setup>
+import { onMounted, ref } from 'vue';
 import TitleWithDescription from './TitleWithDescription.vue';
 import TokenListWithTitle from './TokenListWIthTitle.vue';
-import SmoothButton from './SmoothButton.vue';
+import { getIceCream } from '@/api/iceCream';
 
-const IceCreamName = "Pistacchione"
+const props = defineProps({
+    iceCreamID: String
+});
+
+const iceCream = ref(null);
+
+onMounted(async () => {
+    const iceCreamDTO = await getIceCream(props.iceCreamID);
+    if (iceCreamDTO.code == 1)
+        iceCream.value = iceCreamDTO.iceCream;
+    else
+        console.error(iceCreamDTO.message);
+});
+
 const tokenColorCone = "#C0B9E8"
-const Conetokens = [{
-    id: 1,
-    name: "Cono al pistacchio",
-    type: "cone"
-}]
-
 const tokenColorFlavors = "#E8B9B9"
-const Flavortokens = [{
-    id: 2,
-    name: "Pistacchio di Bronte",
-    type: "flavor"
-},
-{
-    id: 3,
-    name: "Dark Pistacchio",
-    type: "flavor"
-}
-]
-
 const tokenColorToppings = "#E8CDB9"
-const Toppingtokens = [{
-    id: 1,
-    name: "Scaglie al Pistacchio",
-    type: "topping"
-},
-{
-    id: 2,
-    name: "Pistacchietti",
-    type: "topping"
-},
-{
-    id: 3,
-    name: "Pistacchini",
-    type: "topping"
-}
-]
 
+console.log(iceCream)
+
+const notLoadedIceCream = {
+    id: 1,
+    name: "Ice Cream Name",
+    description: "Ice Cream description here.",
+    cone: {
+        id: 1,
+        name: "Cone Name",
+        price: "0"
+    },
+    flavors: [{
+        id: 1,
+        name: "Flavor 1 Name",
+        price: "0"
+    }, {
+        id: 2,
+        name: "Flavor 2 Name",
+        price: "0"
+    }],
+    toppings: [{
+        id: 1,
+        name: "Topping 1 Name",
+        price: "0"
+    }, {
+        id: 2,
+        name: "Topping 2 Name",
+        price: "0"
+    }]
+}
 </script>
 
 <template>
     <div class="white-round-box card">
-        <TitleWithDescription title="Pistacchione"
-            description="A endless classic that will expand your perceprion of the world. An usual day for our Pistacchione Ice Cream."
-            title-size="28px" description-size="14px" />
-        <TokenListWithTitle title="Cone" :tokens="Conetokens" :tokenColor="tokenColorCone" />
-        <TokenListWithTitle title="Flavors" :tokens="Flavortokens" :tokenColor="tokenColorFlavors" />
-        <TokenListWithTitle title="Toppings" :tokens="Toppingtokens" :tokenColor="tokenColorToppings" />
-        <div class="button-get-wrapper">
-            <div class="button-get poppins-semibold">
-                Get
+        <div v-if="iceCream == null">
+            <TitleWithDescription :title="notLoadedIceCream.name" :description="notLoadedIceCream.description"
+                title-size="28px" description-size="14px" />
+            <TokenListWithTitle title="Cone" :tokens="notLoadedIceCream.cone" :tokenColor="tokenColorCone" />
+            <TokenListWithTitle title="Flavors" :tokens="notLoadedIceCream.flavors" :tokenColor="tokenColorFlavors" />
+            <TokenListWithTitle title="Toppings" :tokens="notLoadedIceCream.toppings"
+                :tokenColor="tokenColorToppings" />
+            <div class="button-get-wrapper">
+                <div class="button-get poppins-semibold">
+                    Get
+                </div>
             </div>
         </div>
+
+        <div v-else>
+            <TitleWithDescription :title="iceCream.name" :description="iceCream.description" title-size="28px"
+                description-size="14px" />
+            <TokenListWithTitle title="Cone" :tokens="iceCream.cone" :tokenColor="tokenColorCone" />
+            <TokenListWithTitle title="Flavors" :tokens="iceCream.flavors" :tokenColor="tokenColorFlavors" />
+            <TokenListWithTitle title="Toppings" :tokens="iceCream.toppings" :tokenColor="tokenColorToppings" />
+            <div class="button-get-wrapper">
+                <div class="button-get poppins-semibold">
+                    Get
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 

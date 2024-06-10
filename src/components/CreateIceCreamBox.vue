@@ -17,9 +17,9 @@ import IceCreamCard from './IceCreamCard.vue';
             <TitleWithDescription title="Enjoy our premium selection."
                 description="A curated set of our best Ice Creams. Don't waste time choosing, let our top notch Ice Creams choose you:" />
             <div class="favourites-grid">
-                <FavouriteIceCreamCard />
-                <FavouriteIceCreamCard />
-                <FavouriteIceCreamCard />
+                <FavouriteIceCreamCard iceCreamID="13" />
+                <FavouriteIceCreamCard iceCreamID="13" />
+                <FavouriteIceCreamCard iceCreamID="13" />
             </div>
             <TitleWithDescription title="Or choose your own from our vast offer."
                 description="Our vast selection will leave you without words. " />

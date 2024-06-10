@@ -3,16 +3,22 @@ import IceCreamToken from './IceCreamToken.vue';
 const props = defineProps({
     title: String,
     tokenColor: String,
-    tokens: Array
+    tokens: Array || Object
 });
 </script>
 <template>
     <div>
         <h2>{{ title }}</h2>
         <ul class="tokens-list">
-            <li v-for="token in tokens" :style="{ marginRight: '3px', marginBottom: '3px' }" :key="token.id">
-                <IceCreamToken :text="token.name" :type="token.type" :color="tokenColor" />
-            </li>
+            <ul class="tokens-list">
+                <li v-if="Array.isArray(tokens)" v-for="token in tokens"
+                    :style="{ marginRight: '3px', marginBottom: '3px' }" :key="token.id">
+                    <IceCreamToken :text="token.name" :type="token.type" :color="tokenColor" />
+                </li>
+                <li v-else :style="{ marginRight: '3px', marginBottom: '3px' }">
+                    <IceCreamToken :text="tokens.name" :type="tokens.type" :color="tokenColor" />
+                </li>
+            </ul>
         </ul>
     </div>
 </template>
