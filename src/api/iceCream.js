@@ -11,4 +11,14 @@ async function getIceCream(id) {
   }
 }
 
-export { getIceCream };
+async function getAllIceCreams() {
+  try {
+    const response = await fetch(`${ICE_CREAM_API}/all`);
+    const iceCreams = await response.json();
+    return iceCreams;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export { getIceCream, getAllIceCreams };
