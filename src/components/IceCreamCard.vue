@@ -1,36 +1,20 @@
 <script setup>
-import TitleWithDescription from './TitleWithDescription.vue';
-import MixedIceCreamTokenList from './MixedIceCreamTokenList.vue';
+import TitleWithDescription from '@/components/TitleWithDescription.vue';
+import MixedIceCreamTokenList from '@/components/MixedIceCreamTokenList.vue';
 import SmoothButton from './SmoothButton.vue';
-const IceCreamName = "Cioccolatella"
-const tokens = [{
-    id: 1,
-    name: "Cono al Cioccolato",
-    type: "cone"
-},
-{
-    id: 2,
-    name: "Nutella",
-    type: "flavor"
-},
-{
-    id: 3,
-    name: "Panna",
-    type: "topping"
-},
-{
-    id: 4,
-    name: "Granella di Nocciole",
-    type: "topping"
-}
-]
+
+const props = defineProps({
+    id: String,
+    title: String,
+    description: String,
+    tokens: Array
+});
+
 </script>
 
 <template>
     <div class="white-round-box card">
-        <TitleWithDescription title="Cioccolatella"
-            description="We heard everyone likes nutella. So we made it ice cream." title-size="28px"
-            description-size="14px" />
+        <TitleWithDescription :title="title" :description="description" title-size="28px" description-size="14px" />
 
         <MixedIceCreamTokenList :tokens="tokens" />
 
@@ -44,7 +28,7 @@ const tokens = [{
 .card {
     padding: 20px;
     width: 250px;
-    height: 250px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -52,5 +36,9 @@ const tokens = [{
     background-color: #f4f4f4;
     border-radius: 20px;
     box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.25);
+}
+
+.button-get-wrapper {
+    margin-top: auto;
 }
 </style>
