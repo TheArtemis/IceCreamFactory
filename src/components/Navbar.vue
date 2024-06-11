@@ -28,5 +28,7 @@
     font-size: 60px;
     color: #000000;
     margin: 0px;
+    display: flex;
+    flex-wrap: wrap
 }
 </style>
