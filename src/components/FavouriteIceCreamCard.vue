@@ -1,8 +1,10 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import TitleWithDescription from './TitleWithDescription.vue';
-import TokenListWithTitle from './TokenListWIthTitle.vue';
+import TitleWithDescription from '@/components/TitleWithDescription.vue';
+import TokenListWithTitle from '@/components/TokenListWIthTitle.vue';
 import { getIceCream } from '@/api/iceCream';
+import { addPeriod, format } from '@/common/textFormatting';
+import { toToken } from '@/common/objectProcessing';
 
 const props = defineProps({
     iceCreamID: String
@@ -21,8 +23,6 @@ onMounted(async () => {
 const tokenColorCone = "#C0B9E8"
 const tokenColorFlavors = "#E8B9B9"
 const tokenColorToppings = "#E8CDB9"
-
-console.log(iceCream)
 
 const notLoadedIceCream = {
     id: 1,
@@ -59,9 +59,11 @@ const notLoadedIceCream = {
         <div v-if="iceCream == null">
             <TitleWithDescription :title="notLoadedIceCream.name" :description="notLoadedIceCream.description"
                 title-size="28px" description-size="14px" />
-            <TokenListWithTitle title="Cone" :tokens="notLoadedIceCream.cone" :tokenColor="tokenColorCone" />
-            <TokenListWithTitle title="Flavors" :tokens="notLoadedIceCream.flavors" :tokenColor="tokenColorFlavors" />
-            <TokenListWithTitle title="Toppings" :tokens="notLoadedIceCream.toppings"
+            <TokenListWithTitle title="Cone" :tokens="toToken(notLoadedIceCream.cone, 'cone')"
+                :tokenColor="tokenColorCone" />
+            <TokenListWithTitle title="Flavors" :tokens="toToken(notLoadedIceCream.flavors, 'flavor')"
+                :tokenColor="tokenColorFlavors" />
+            <TokenListWithTitle title="Toppings" :tokens="toToken(notLoadedIceCream.toppings, 'topping')"
                 :tokenColor="tokenColorToppings" />
             <div class="button-get-wrapper">
                 <div class="button-get poppins-semibold">
@@ -71,11 +73,13 @@ const notLoadedIceCream = {
         </div>
 
         <div v-else>
-            <TitleWithDescription :title="iceCream.name" :description="iceCream.description" title-size="28px"
-                description-size="14px" />
-            <TokenListWithTitle title="Cone" :tokens="iceCream.cone" :tokenColor="tokenColorCone" />
-            <TokenListWithTitle title="Flavors" :tokens="iceCream.flavors" :tokenColor="tokenColorFlavors" />
-            <TokenListWithTitle title="Toppings" :tokens="iceCream.toppings" :tokenColor="tokenColorToppings" />
+            <TitleWithDescription :title="format(iceCream.name)" :description="addPeriod(iceCream.description)"
+                title-size="28px" description-size="14px" />
+            <TokenListWithTitle title="Cone" :tokens="toToken(iceCream.cone, 'cone')" :tokenColor="tokenColorCone" />
+            <TokenListWithTitle title="Flavors" :tokens="toToken(iceCream.flavors, 'flavor')"
+                :tokenColor="tokenColorFlavors" />
+            <TokenListWithTitle title="Toppings" :tokens="toToken(iceCream.toppings, 'topping')"
+                :tokenColor="tokenColorToppings" />
             <div class="button-get-wrapper">
                 <div class="button-get poppins-semibold">
                     Get
@@ -130,5 +134,28 @@ const notLoadedIceCream = {
 .button-get:hover {
     cursor: pointer;
     border-radius: 100px 100px 100px 100px;
+    /* animation: borderWobble 3s infinite; */
 }
+
+/* @keyframes borderWobble {
+    0% {
+        border-radius: 40px 60px 40px 60px;
+    }
+
+    25% {
+        border-radius: 100px 100px 100px 100px;
+    }
+
+    50% {
+        border-radius: 60px 40px 60px 40px;
+    }
+
+    75% {
+        border-radius: 100px 100px 100px 100px;
+    }
+
+    100% {
+        border-radius: 40px 60px 40px 60px;
+    }
+} */
 </style>

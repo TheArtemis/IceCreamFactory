@@ -24,5 +24,7 @@ const props = defineProps({
 
 .token-text {
     font-size: 13px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
-</style>>
+</style>

@@ -1,5 +1,6 @@
 <script setup>
-import IceCreamToken from './IceCreamToken.vue';
+import IceCreamToken from '@/components/IceCreamToken.vue';
+import { format } from '@/common/textFormatting';
 const props = defineProps({
     tokens: Array
 });
@@ -13,7 +14,7 @@ const tokenColorObj = {
 <template>
     <ul class="tokens-list">
         <li v-for="token in tokens" :style="{ marginRight: '3px', marginBottom: '3px' }" :key="token.id">
-            <IceCreamToken :text="token.name" :type="token.type" :color="tokenColorObj[token.type]" />
+            <IceCreamToken :text="format(token.name)" :type="token.type" :color="tokenColorObj[token.type]" />
         </li>
     </ul>
 </template>

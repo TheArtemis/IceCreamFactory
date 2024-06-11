@@ -1,9 +1,10 @@
 <script setup>
-import IceCreamToken from './IceCreamToken.vue';
+import IceCreamToken from '@/components/IceCreamToken.vue';
+import { format } from '@/common/textFormatting';
 const props = defineProps({
     title: String,
     tokenColor: String,
-    tokens: Array || Object
+    tokens: Array
 });
 </script>
 <template>
@@ -11,12 +12,8 @@ const props = defineProps({
         <h2>{{ title }}</h2>
         <ul class="tokens-list">
             <ul class="tokens-list">
-                <li v-if="Array.isArray(tokens)" v-for="token in tokens"
-                    :style="{ marginRight: '3px', marginBottom: '3px' }" :key="token.id">
-                    <IceCreamToken :text="token.name" :type="token.type" :color="tokenColor" />
-                </li>
-                <li v-else :style="{ marginRight: '3px', marginBottom: '3px' }">
-                    <IceCreamToken :text="tokens.name" :type="tokens.type" :color="tokenColor" />
+                <li v-for="token in tokens" :style="{ marginRight: '3px', marginBottom: '3px' }" :key="token.id">
+                    <IceCreamToken :text="format(token.name)" :type="token.type" :color="tokenColor" />
                 </li>
             </ul>
         </ul>
