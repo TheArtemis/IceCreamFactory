@@ -1,11 +1,13 @@
 <script setup>
+const homeRoute = {
+    name: 'home'
+}
+
 </script>
 
 <template>
     <div class="navbar-box">
-        <div class="navbar-title poppins-semibold">
-            Ice Cream Factory
-        </div>
+        <button class="navbar-title poppins-semibold" @click="() => $router.push(homeRoute)">Ice Cream Factory</button>
     </div>
 </template>
 
@@ -17,7 +19,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    padding: 160px;
+    padding: 220px;
     padding-top: 20px;
     padding-bottom: 20px;
     margin: 2em;
@@ -25,10 +27,20 @@
 }
 
 .navbar-title {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: inherit;
     font-size: 60px;
     color: #000000;
     margin: 0px;
     display: flex;
     flex-wrap: wrap
+}
+
+.navbar-title:hover {
+    cursor: pointer;
 }
 </style>
