@@ -8,6 +8,8 @@ import { getAllIceCreams } from '@/api/iceCream';
 import { toSingleTokenList } from '@/common/objectProcessing';
 import { format, addPeriod } from '@/common/textFormatting';
 
+const createIceCreamRoute = { name: "create-icecream" };
+
 const iceCreams = ref(null);
 
 onMounted(async () => {
@@ -29,7 +31,8 @@ onMounted(async () => {
         <TitleWithDescription title="Express your creativity."
             description="Show us what we have not discovered yet. Reveal the ways of a new Ice Cream that will blow off our senses. Unveil a new horizon of pleasure and push the limits of taste. Create. Create now. Create here." />
         <div class=" button-wrapper">
-            <SmoothButton class="create-button" button-color="#B9E8E2" button-text="create" size="big" />
+            <SmoothButton class="create-button" button-color="#B9E8E2" text="create" size="big"
+                :on-click="() => $router.push(createIceCreamRoute)" />
         </div>
         <div class="ice-cream selection">
             <TitleWithDescription title="Enjoy our premium selection."
@@ -64,7 +67,7 @@ onMounted(async () => {
     padding-bottom: 20px;
     width: 900px;
     padding: 50px;
-    height: 3000px;
+    /* height: 100%; */
 }
 
 .button-wrapper {
