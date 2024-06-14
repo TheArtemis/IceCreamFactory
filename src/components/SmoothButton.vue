@@ -1,24 +1,21 @@
 <script setup>
+import { format } from '@/common/textFormatting';
 const props = defineProps({
     onClick: Function,
-    buttonText: String,
-    buttonColor: String,
+    text: String,
+    color: String,
     size: {
         type: String,
         default: "big"
     }
 })
 
-function formatButtonText(text) {
-    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-}
-
 </script>
 
 <template>
     <div class="smooth-button white-round-box poppins-semibold" :class="size" @click="(p) => onClick(p)"
-        :style="{ backgroundColor: buttonColor }">
-        {{ formatButtonText(buttonText) }}
+        :style="{ backgroundColor: color }">
+        {{ format(text) }}
     </div>
 </template>
 

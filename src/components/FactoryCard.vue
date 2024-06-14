@@ -5,8 +5,8 @@ const props = defineProps({
     titleFirstLine: String,
     titleSecondLine: String,
     description: String,
-    buttonText: String,
-    buttonColor: String,
+    text: String,
+    color: String,
     buttonPath: String,
     cardBorderStyle: String
 })
@@ -22,8 +22,9 @@ const props = defineProps({
             <div class='card-description poppins-medium'>{{ description }}</div>
             <div class='button-wrapper'>
                 <button @click="$router.push({ name: buttonPath })" class='show-button poppins-semibold'
-                    :style="{ backgroundColor: buttonColor }">{{ buttonText
-                    }}</button>
+                    :style="{ backgroundColor: color }">
+                    {{ text }}
+                </button>
             </div>
         </div>
     </div>

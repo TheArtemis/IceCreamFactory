@@ -1,6 +1,6 @@
 <script setup>
 import TitleWithDescription from '@/components/TitleWithDescription.vue';
-import MixedIceCreamTokenList from '@/components/MixedIceCreamTokenList.vue';
+import MixedIceCreamTokenList from '@/components/TokenList.vue';
 import SmoothButton from './SmoothButton.vue';
 
 const props = defineProps({
@@ -19,7 +19,7 @@ const props = defineProps({
         <MixedIceCreamTokenList :tokens="tokens" />
 
         <div class="button-get-wrapper">
-            <SmoothButton button-text="Get" button-color="#B9E8E2" size="small" />
+            <SmoothButton text="Get" button-color="#B9E8E2" size="small" />
         </div>
     </div>
 </template>
